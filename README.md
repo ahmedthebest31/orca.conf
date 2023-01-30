@@ -13,7 +13,7 @@ cd orca.conf
 ./install.sh
 ```
 
-Manual Installation
+## Manual Installation
 Alternatively, you can manually install the configuration file by replacing the user-settings.conf file in the following directory:
 
 /home/user/.local/share/orca
