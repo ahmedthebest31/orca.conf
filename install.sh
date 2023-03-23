@@ -4,8 +4,8 @@
 if ! command -v orca &> /dev/null
 then
     # Install Orca
-    sudo apt-get update
-    sudo apt-get install -y orca
+    sudo apt update
+    sudo apt install -y orca
 fi
 
 # Create the directory if it doesn't exist

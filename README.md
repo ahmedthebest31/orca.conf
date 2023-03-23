@@ -49,13 +49,12 @@ You can activate Orca by using the keyboard shortcut Win + Control + S or by run
 ```bash
 orca -r
 ```
+## extras
+• install arabic TTS / voices    
+This script installs necessary dependencies for the Mishkal Arabic diacritizer and sets up the environment for using it. It checks for the presence of eSpeak, Mbrola and Arabic voices, speech dispatcher, Orca screen reader, Git, and Python3, and installs them if they are not already present.
 
-Benefits
-This configuration file can be particularly useful for:
+yu can find it in extras directory  
 
-Users who need to customize the behavior of Orca screen reader according to their specific requirements.
-System administrators who need to install Orca on multiple machines.
-Users who need to reinstall Orca on their own machine.
 
 ### Contributions
 If you would like to contribute to this project, feel free to open a pull request or an issue on the GitHub repository. Your feedback and contributions are always welcome
