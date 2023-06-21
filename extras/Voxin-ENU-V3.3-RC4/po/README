@@ -1,0 +1,25 @@
+# This file is under LGPL license
+# March 2007, Gilles Casse <gcasse@oralux.org>
+#
+Create the po file, for example for french:
+
+./new_po.sh 
+fr
+
+Edit for example, the fr.new.po file.
+Using the Emacs po mode:
+
+n next entry
+
+Select the entry that you want to update (the fuzzy, or untranslated entry).
+Press the RETURN key, the translation window is opened.
+Type your translation, and C-c C-c for coming back to the po file.
+
+The TAB key removes the fuzzy flag.
+The DEL key is useful for removing the obsolete entry.
+
+./install_po.sh
+fr
+
+Gettext reference:
+http://www.gnu.org/software/gettext/manual/html_mono/gettext.html

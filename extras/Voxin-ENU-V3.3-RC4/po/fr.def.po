@@ -1,0 +1,156 @@
+# Voxin po file
+# Copyright (C) 2007-2019, Oralux.org Association
+# This file is distributed under the LGPL license.
+# Gilles Casse <gcasse@oralux.org>, March 2007.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: voxin-installer 3.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-08-26 10:40+0200\n"
+"PO-Revision-Date: 2019-10-20 11:52+0200\n"
+"Last-Translator: Gilles Casse <gcasse@oralux.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../common/ask.inc:78 ../common/ask.inc:147
+msgid "1. Do you want to read again the End-User Agreement?"
+msgstr "1. Souhaitez-vous relire la licence utilisateur ?"
+
+#: ../common/ask.inc:99
+msgid "2. Do you want to read again the IBM License Agreement?"
+msgstr "2. Souhaitez-vous relire la licence IBM (en anglais) ?"
+
+#: ../common/ask.inc:163
+msgid "2. Do you want to read again the LGPL License?"
+msgstr "3. Souhaitez-vous relire la licence LGPL?"
+
+#: ../common/ask.inc:111
+msgid "3. Do you want to read again the LGPL License?"
+msgstr "3. Souhaitez-vous relire la licence LGPL (en anglais) ?"
+
+#: ../common/ask.inc:74 ../common/ask.inc:143
+msgid "Do you agree the licenses?"
+msgstr "Acceptez-vous les licences ?"
+
+#: ../common/ask.inc:42
+msgid "Do you authorize the update of the configuration files (speechd.conf)?"
+msgstr ""
+"Autorisez-vous la mise à jour des fichiers de configurations (speechd.conf) ?"
+
+#: ../voxin-installer.sh:74 ../voxin-installer.sh:86 ../common/ask.inc:17
+msgid "Do you really want to continue?"
+msgstr "Voulez-vous vraiment continuer ?"
+
+#: ../common/ask.inc:31
+msgid "Do you want to install a new language?"
+msgstr "Souhaitez-vous installer une nouvelle langue ?"
+
+#: ../common/ask.inc:50
+msgid "Do you want to uninstall the TTS?"
+msgstr "Souhaitez-vous désinstaller la synthèse vocale ?"
+
+#: ../common/init.inc:229
+msgid "Error: no 'all' tarball"
+msgstr "Erreur : aucune archive 'all'"
+
+#: ../common/init.inc:242
+msgid "Error: no 'voxind' tarball"
+msgstr "Erreur : aucune archive voxind"
+
+#: ../voxin-installer.sh:34 ../voxin-installer.sh:40
+msgid "For support, email to contact at oralux.org "
+msgstr "Pour tout support, écrivez à contact at oralux.org "
+
+#: ../voxin-installer.sh:78 ../voxin-installer.sh:90 ../voxin-installer.sh:158
+msgid "Good Bye. "
+msgstr "Au revoir. "
+
+#: ../voxin-installer.sh:73 ../common/ask.inc:16
+msgid ""
+"If the installation continues, orca will not be able to use voxin, but "
+"emacspeak will"
+msgstr ""
+"Si l'installation est poursuivie, orca ne pourra pas utiliser voxin mais "
+"emacspeak le pourra"
+
+#: ../voxin-installer.sh:75 ../voxin-installer.sh:87 ../common/ask.inc:18
+#: ../common/ask.inc:32 ../common/ask.inc:75 ../common/ask.inc:79
+#: ../common/ask.inc:100 ../common/ask.inc:112 ../common/ask.inc:144
+#: ../common/ask.inc:148 ../common/ask.inc:164
+msgid "If yes, press the ENTER key."
+msgstr "Si oui, appuyez sur la touche Entrée."
+
+#: ../common/ask.inc:43 ../common/ask.inc:51
+msgid "If you agree please type OK and press the ENTER key."
+msgstr "Si vous acceptez, tapez OK et appuyez sur la touche Entrée"
+
+#: ../common/ask.inc:95 ../common/ask.inc:159
+msgid "If you agree to the End-User Agreement, press the ENTER key"
+msgstr "Si vous acceptez la licence utilisateur, appuyez sur la touche Entrée"
+
+#: ../common/ask.inc:107
+msgid "If you agree to the IBM license agreement, press the ENTER key"
+msgstr "Si vous acceptez la licence IBM, appuyez sur la touche Entrée"
+
+#: ../common/ask.inc:119 ../common/ask.inc:171
+msgid "If you agree to the LGPL license, press the ENTER key"
+msgstr "Si vous acceptez la licence LGPL, appuyez sur la touche Entrée"
+
+#: ../voxin-installer.sh:121
+msgid "Initialization; please wait... "
+msgstr "Initialisation; patientez svp... "
+
+#: ../voxin-installer.sh:120
+msgid "Logs written in log/voxin.log"
+msgstr "Logs écrits dans log/voxin.log"
+
+#: ../common/init.inc:71
+msgid "Operation completed. "
+msgstr "L'opération est terminée. "
+
+#: ../voxin-installer.sh:29
+msgid "Please run voxin-installer as root. "
+msgstr "Lancez svp voxin-installer en tant que root. "
+
+#: ../common/ask.inc:82 ../common/ask.inc:151
+msgid "Please use the space bar to scroll through the document."
+msgstr "Appuyez svp sur la barre d'espace pour passez de page en page."
+
+#: ../common/init.inc:48
+msgid "Please wait..."
+msgstr "Patientez svp..."
+
+#: ../voxin-installer.sh:33
+msgid "Sorry, this distribution is not yet supported. "
+msgstr "Désolé, cette distribution n'est pas encore supportée. "
+
+#: ../voxin-installer.sh:39
+msgid "Sorry, this installer does not expect a symbolic link /opt"
+msgstr "Désolé cet installeur ne gère pas le lien symbolique en /opt"
+
+#: ../voxin-installer.sh:157
+msgid "The changes will be taken into account on next boot. "
+msgstr ""
+"Les modifications seront prises en compte au prochain démarrage du PC. "
+
+#: ../common/ask.inc:41
+msgid "The voxin module must be added to the configuration files"
+msgstr "Le module Voxin doit être ajouté aux fichiers de configuration"
+
+#: ../common/init.inc:50
+msgid "You do not authorize the installer to perform this operation"
+msgstr "vous n'autorisez pas l'installeur à exécuter cette opération"
+
+#: ../voxin-installer.sh:84
+msgid "Your version of speech-dispatcher has not been recognized."
+msgstr "Votre version de speech-dispatcher n'a pas été reconnue."
+
+#: ../common/init.inc:124 ../common/init.inc:134
+msgid "rfs all tarball not found!"
+msgstr "l'archive rfs all est absente !"
+
+#: ../common/init.inc:327
+msgid "voxin package not found!"
+msgstr "le paquet voxin est absent !"

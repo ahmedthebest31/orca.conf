@@ -1,0 +1,68 @@
+User dictionaries
+
+* Introduction
+Voxin provides an ibmtts module for speech dispatcher which activates the ibmtts dictionaries.
+
+IBM TTS supports user dictionaries so that you may customize  the pronunciation of words, beginning of words or abbreviations according to the language. 
+
+The dictionaries files must be placed in the Ibmtts Dictionary directory, which is by default /var/opt/IBM/ibmtts/dict
+
+If several languages are installed, you may want to create one sub-directory per language and check that the speechd.conf file is set accordingly (see "Speech-Dispatcher Configuration" below).
+
+* Examples
+Three examples : 
+
+- a single language is installed:
+place your files under the Ibmtts dictionary directory.
+
+- two languages are installed, say English and French:
+place your files under the Ibmtts dictionary directory in sub-directories en and fr
+
+- the same language for different regions are installed, say Castilian Spanish and Mexican Spanish:
+  place your files in directories es_ES and es_MX
+
+The directory names are listed below ("Directory Names" and "Extended Directory Names").
+
+The name of the dictionary files are:
+
+- main.dct: main dictionary
+- root.dct: roots dictionary
+- extension.dct: main extension dictionary
+- abbreviation.dct: abbreviation dictionary 
+
+The IBM TTS documentation details the syntax of the user dictionaries.
+Basically, it is one line per entry, composed of key, tabulation, value. 
+Examples are included in the Voxin archive.
+
+* Directory Names
+
+de: German
+en: English
+es: Spanish
+fi: Finnish
+fr: French
+it: Italian
+ja: Japanese
+pt: Portuguese
+zh: Chinese
+
+** Extended Directory Names
+en_GB: British English
+en_US: American English
+fr_CA: Canadian French
+fr_FR: French
+pt_BR: Brazilian Portuguese
+zh_CN: Mandarin Chinese
+zh_TW: Mandarin Taiwanese
+
+* Speech-Dispatcher Configuration
+** speechd.conf: enabling sub-directory
+
+If you have created one sub-directory under the dictionary directory for your main language, checks that the DefaultLanguage variable is uncommented and correctly set in speechd.conf.
+For example, if your main language is French:
+DefaultLanguage "fr"
+
+** ibmtts.conf: dictionary directory
+The pathname of the dictionary directory can be set using variable IbmttsDictionaryFolder in ibmtts.conf.
+By default, the configuration line is:
+IbmttsDictionaryFolder "/var/opt/IBM/ibmtts/dict"

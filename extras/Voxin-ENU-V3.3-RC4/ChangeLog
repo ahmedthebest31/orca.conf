@@ -1,0 +1,538 @@
+2021-01-03 Gilles Casse <gcasse@oralux.org>
+	release 3.3rc4 for Vocalizer Embedded (x86_64, armv7l, armv8) and IBM TTS (x86_64):
+
+	- Compatibility with distributions supplying Speech Dispatcher 0.10.2.
+	The Speech Dispatcher voxin output module is either already
+	provided by the distribution (starting with speech-dispatcher
+	0.10.2) or otherwise will be installed from the tarball
+	(voxin-speechd-conf and/or voxin-speechd packages).
+	Tested on Arch Linux, Debian sid, openSUSE, Slint... Full list in
+	README.
+
+	- Gentoo & Fedora: install to /usr/lib64 for 64 bits architectures.
+
+	- (Vocalizer Embedded) Fix misplaced sound icon in capital mode.
+	Complete rework of indexes.
+
+	- (IBM TTS) Fix spelling regressions introduced in version 3.2.
+	With punctuation level set to none, the original spelling was
+	altered when a punctuation character preceded a capital
+	letter.
+
+	- installer:
+	After user's authorization, check if the voxin module must be
+	added to the speechd.conf files:
+	/home/*/.config/speech-dispatcher/speechd.conf
+	/etc/speech-dispatcher/speechd.conf
+	Voxin must be added if there are uncommented AddModule lines in
+	speechd.conf and none of them concerns voxin.
+	Checked with speech-dispatcher 0.9.1 (Gentoo)
+
+	- uninstall: remove /opt/oralux, /var/opt/oralux
+
+2020-12-06 Gilles Casse <gcasse@oralux.org>
+	release 3.3rc3 for Vocalizer Embedded (x86_64, armv7l, armv8) and IBM TTS (x86_64):
+
+	- Installer: fix for ArchLinux.
+
+2020-11-29 Gilles Casse <gcasse@oralux.org>
+	release 3.3rc2 for Vocalizer Embedded (x86_64, armv7l, armv8) and IBM TTS (x86_64):
+
+	- Compatibility with Raspberry Pi OS.
+
+	- Add voxin.ini, configuration file
+	The user may now define the default value of several parameters:
+	capitalization, punctuation, and only for viavoice: dictionaryDir,
+	useAbbreviation.
+	More details in the README file (in paragraph: "voxin.ini configuration file").
+
+	- Only for Vocalizer Embedded: fix erroneous speed and pitch changes:
+	the speed and pitch parameters were erroneously modified when a
+	secondary speech-dispatcher client (e.g. spd-say) was called.
+
+	- Installer: before installing a new version of voxin, the
+	previously installed version has to be uninstalled.
+	More checks are now added: check first that the system enables
+	package installation, and if the installation fails, try to
+	restore the previous version.
+
+2020-10-09 Gilles Casse <gcasse@oralux.org>
+	release 3.3rc1: restore compatibility with speech-dispatcher 0.7, 0.8 and 0.8.8 .
+
+2020-10-08 Gilles Casse <gcasse@oralux.org>
+	release 3.2 for Vocalizer Embedded (x86_64, armv7l, armv8) and IBM TTS (x86_64):
+	- Capital mode: emits a brief sound to point out a word with a capital letter, doubled this sound if all caps.
+	  This mode can be currently activated through Orca and Speech-Dispatcher (compatible 0.10.1, 0.9.1, 0.9.0).
+	- Backport the speech-dispatcher ibmtts module from upstream/master to version 0.10.1 .
+	- voxind-nve (x86_64) built on Debian 8 to depend on glibc 2.2.5 instead of glibc 2.27 (logf).
+
+2020-08-26 Gilles Casse <gcasse@oralux.org>
+	release 3.1 for Vocalizer Embedded (x86_64, armv7l, armv8), IBM TTS (x86_64):
+	- ARM: checked on Raspberry PI 4B (Ubuntu Mate and Arch Linux ARM)
+	- sd_voxin and voxin.conf: new speechd dispatcher module (compatible 0.10.1, 0.9.1, 0.9.0)
+	- fix old issue: take in account the speech-dispatcher configuration (IbmttsUseAbbreviation,...)
+
+2020-01-06 Gilles Casse <gcasse@oralux.org>
+	release 3.1rc2 for IBM TTS (x86_64):
+	- fix the list of utf-8 characters to be replaced by the ascii quote
+
+2020-01-05 Gilles Casse <gcasse@oralux.org>
+	release 3.1rc1 for IBM TTS:
+	- fix issue which caused texts to be filtered (not spoken); filter
+	  now only an utf-8 character having no counterpart in the charset
+	  expected by the text-to-speech.
+	- replace any utf-8 character related to a quote to its equivalent in ascii (0x27)
+
+2020-01-01 Gilles Casse <gcasse@oralux.org>
+        init.inc: fix conflict between filenames, allison and the all filename suffix
+
+2019-12-25 Gilles Casse <gcasse@oralux.org>
+	release 3.0: New voices, new languages in Voxin based on Vocalizer Embedded (libvoxin 1.4.4).
+	The aim is to have more TTS choices for Orca, Emacspeak and possibly the console based screen readers (x86, x86_64, or arm v5, v7-a, v8-a).
+	IBM TTS is still proposed.
+
+	Here are the known current limits of voxin 3.0.
+	These limits should be removed in the forthcoming updates.
+
+	- only for x86_64 architecture (not yet x86, arm),
+	- compatible with Speech-Dispatcher (version > 0.7),
+	- compatible with a previous installation of voxin (version >= 2.0),
+	- only for UTF-8 texts,
+	- limited set of parameters (language, speed, volume, pitch),
+	- not yet compatible with Emacspeak,
+	- no support yet for dictionaries or annotations,
+	- cannot automatically switch from one language to another one.
+
+2019-05-30 Gilles Casse <gcasse@oralux.org>
+	release 2.2: Ignore unknown characters instead of replacing them by '?' (libvoxin 1.3.6)
+
+2019-05-25 Gilles Casse <gcasse@oralux.org>
+	release 2.1: add compatibility with older distributions (Debian 8, CentOS7)
+	- rebuild on Debian 8 instead of Debian 9 originally due to unresolved symbol in libstdc++
+	- rebuild the minimal rfs32 from Buildroot on older kernel headers (3.10)
+	- patch speech-dispatcher 0.9 to compile the ibmtts module on Debian 8
+	- include additional ibmtts modules for speech-dispatcher 0.8 (only 0.8.8 before) and 0.7.1
+
+2019-03-18 Gilles Casse <gcasse@oralux.org>
+	release 2.0: same features as 2.0beta1 plus:
+
+	- include libvoxin 1.3.4: fix an issue with Japanese language (punctuation filter).
+	- compatibility with multiple speech-dispatcher versions (0.9.0, 0.8.x). The list of installed languages is now correctly supplied and enables language switching.
+	- slackware package: fix the doinst.sh script so that it may be correctly parsed by removepkg
+	- slackware/slint installation: fix the removepkg call (thanks to Didier Spaier).
+
+	To download this release, use your usual download url.
+
+2019-03-05 Gilles Casse <gcasse@oralux.org>
+	release 2.0beta1:
+	- compatibility with much more GNU/Linux distributions (and their family: derivatives, parent distro). List below.
+	- include voxin-say to convert text to wav files (e.g. basic audio books).
+
+	Known restrictions of this beta-release:
+	- if you have installed several voxin languages, it is not yet possible to switch languages via speech-dispatcher.
+
+	Tested distributions (much more should be compatible):
+	- x86_64: Arch Linux, Debian 9, Fedora 29, Gentoo, openSUSE Leap 15.0, Slint64-14.2.1.1, 14.2.1.2, Ubuntu 18.04
+	- i686: Debian 9, openSUSE Tumbleweed-i586
+
+	To download this beta-release, append to your download url these 8 characters:
+	&v=beta1
+
+2018-07-22 Gilles Casse <gcasse@oralux.org>
+	release 1.15:
+	- libvoxin 1.1.10 (debian package): don't replace xml entities with white spaces (case of "I'd ")
+
+2017-11-18 Gilles Casse <gcasse@oralux.org>
+	release 1.14:
+	- Compatibility Kali Linux 2017.3
+
+2017-10-08 Gilles Casse <gcasse@oralux.org>
+	release 1.13:
+	- Debian 9/Ubuntu 16.x: Fix bug with pronunciation of xml entities (e.g. character < was spoken &lt; )
+	- Compatibility Kali Linux 2017.2
+
+2017-07-27 Gilles Casse <gcasse@oralux.org>
+	release 1.12:
+	- Fix bug with pathname including space characters
+	- Fix regression on Ubuntu 14.04 : build libvoxin/voxind
+	  with gcc 4.8
+
+2017-07-14 Gilles Casse <gcasse@oralux.org>
+	release 1.11:
+	- Compatibility Fedora 26
+
+2017-05-21 Gilles Casse <gcasse@oralux.org>
+	release 1.10:
+	- Compatibility Fedora 25
+
+2017-04-17 Gilles Casse <gcasse@oralux.org>
+	release 1.9:
+	- libvoxin 1.1.7: converts text to the expected charset
+
+2017-04-02 Gilles Casse <gcasse@oralux.org>
+	release 1.8:
+	- Compatibility Debian 9, Ubuntu 17.04
+	- libvoxin 1.1.5: fixes spurious spellings in the punctuation
+	  filter,...
+	- speech-dispatcher-voxin 0.8.6: fixes the initialization of the
+	  user dictionaries
+
+2017-01-14 Gilles Casse <gcasse@oralux.org>
+	release 1.7:
+	Fix: installation failure on Arch Linux due to a relative log
+	filename
+
+2016-12-17 Gilles Casse <gcasse@oralux.org>
+	release 1.6:
+	Compatibility Ubuntu 14.04, Vinux 5
+
+2016-12-11 Gilles Casse <gcasse@oralux.org>
+	release 1.5:
+	Facilitate the merge with an older voxin release
+
+2016-10-16 Gilles Casse <gcasse@oralux.org>
+	release 1.4:
+	Compatibility Kali 2016.2.
+
+2016-10-09 Gilles Casse  <gcasse@oralux.org>
+	release 1.3:
+	Compatibility Ubuntu 16.10.
+	Includes libvoxin 1.1.2.
+
+2016-09-18 Gilles Casse  <gcasse@oralux.org>
+	release 1.2: compatibility Sonar GNU/Linux
+
+2016-09-14 Gilles Casse  <gcasse@oralux.org>
+	release 1.1: update README file
+
+2016-09-13 Gilles Casse  <gcasse@oralux.org>
+	release 1.1:
+	Compatibility with Arch Linux (tests on 20160801) for i686 and x86_64.
+	PKGBUILD available in packages/archlinux/abs.
+
+2016-01-31 Gilles Casse  <gcasse@oralux.org>
+	release 1.00:
+	Compatibility with Debian 8.3, Ubuntu 15.10 and 16.04 (tests on alpha2).
+	The new libvoxin library eases the integration of voxin on 64 bits
+	architectures.
+	The install scripts have been reviewed and cleaned up.
+
+2015-12-16 Gilles Casse  <gcasse@oralux.org>
+	release 0.68:
+	Remove temporarily the support of Debian Jessie
+
+2015-10-08 Gilles Casse  <gcasse@oralux.org>
+	release 0.67:
+	Compatibility CentOS7, Fedora 22 (32 and 64 bits)
+
+2015-04-25 Gilles Casse  <gcasse@oralux.org>
+	release 0.66:
+	Compatibility Ubuntu 15.04, 32 and 64 bits
+
+2015-01-24 Gilles Casse  <gcasse@oralux.org>
+	release 0.65:
+	Compatibility Fedora 21, 32 and 64 bits
+
+2014-10-26 Gilles Casse  <gcasse@oralux.org>
+	release 0.64:
+	Compatibility Ubuntu 14.10, 32 and 64 bits
+
+2014-08-04 Gilles Casse  <gcasse@oralux.org>
+	release 0.63:
+	Fix: the voxin-installer now does not change anymore the directory metadata (concern /, /opt, /var/opt). Thank you to Lucas Radaelli for his feedback.
+
+2014-07-21 Gilles Casse  <gcasse@oralux.org>
+	release 0.62:
+	Compatibility with Debian Jessie, 32 or 64 bits.
+
+2014-05-09 Gilles Casse  <gcasse@oralux.org>
+	release 0.61:
+	Compatibility with Sonar GNU/Linux (sonar-gnome-2014.1alpha3), 32 or 64 bits.
+
+2014-05-01 Gilles Casse  <gcasse@oralux.org>
+	release 0.60:
+	- Compatibility Ubuntu 14.04, 32 and 64 bits.
+
+2014-04-12 Gilles Casse  <gcasse@oralux.org>
+	release 0.59:
+	- Fix for Ubuntu 12.04.
+
+2014-03-03 Gilles Casse  <gcasse@oralux.org>
+	release 0.58:
+	- Compatibility ScientificLinux 6.5, 32 and 64 bits.
+
+2014-03-02 Gilles Casse  <gcasse@oralux.org>
+	release 0.57:
+	- Compatibility CentOS 6.5, 32 and 64 bits.
+
+2014-01-04 Gilles Casse  <gcasse@oralux.org>
+	release 0.56:
+	- Compatibility Fedora 19, 32 and 64 bits.
+	- Enable the IBM TTS user dictionaries in speech-dispatcher.
+
+2013-10-27 Gilles Casse  <gcasse@oralux.org>
+	release 0.55:
+	- Compatibility ArchLinux (20131001); enable the IBM TTS user dictionaries in speech-dispatcher.
+
+2013-10-26 Gilles Casse  <gcasse@oralux.org>
+	release 0.54:
+	- Compatibility Ubuntu 13.10; enable the IBM TTS user dictionaries in speech-dispatcher.
+
+2013-10-13 Gilles Casse  <gcasse@oralux.org>
+	release 0.53:
+	- Fedora 19: enable the IBM TTS user dictionaries in speech-dispatcher
+
+2013-08-24 Gilles Casse  <gcasse@oralux.org>
+	release 0.52:
+	- improve the identification of distros
+
+2013-08-17 Gilles Casse  <gcasse@oralux.org>
+	release 0.51:
+	- Compatibility Fedora 19, 32 and 64 bits.
+
+2013-05-17 Gilles Casse  <gcasse@oralux.org>
+	release 0.50:
+	- Compatibility Ubuntu Gnome 13.04, 32 and 64 bits.
+	- Inhibit the automatic speech dispatcher package builder
+
+2013-04-21 Gilles Casse  <gcasse@oralux.org>
+	release 0.49:
+	- Compatibility Kali 1.02, 32 and 64 bits (Live CD).
+
+2013-04-07 Gilles Casse  <gcasse@oralux.org>
+	release 0.48:
+	- Compatibility Ubuntu 13.04, 32 and 64 bits.
+
+2013-04-02 Gilles Casse  <gcasse@oralux.org>
+	release 0.47:
+	- Compatibility ArchLinux 2013, 32 and 64 bits.
+
+2013-03-24 Gilles Casse  <gcasse@oralux.org>
+	release 0.46:
+	- Compatibility openSUSE 12.3, 32 and 64 bits.
+
+2013-03-17 Gilles Casse  <gcasse@oralux.org>
+	release 0.45:
+	- Compatibility Debian Wheezy (rc1), 32 and 64 bits, speech-dispatcher.
+
+2013-01-26 Gilles Casse  <gcasse@oralux.org>
+	release 0.44:
+	- Compatibility Fedora 18, 32 and 64 bits.
+
+2012-07-12 Gilles Casse  <gcasse@oralux.org>
+	release 0.43:
+	- Compatibility Ubuntu 12.10, 32 and 64 bits.
+
+2012-07-12 Gilles Casse  <gcasse@oralux.org>
+	release 0.42:
+	- Compatibility F123 Visual 11.05.
+
+2012-04-01 Gilles Casse  <gcasse@oralux.org>
+	release 0.41:
+	- Compatibility Ubuntu 12.04, 32 and 64 bits (multiarch).
+
+2011-01-29 Gilles Casse  <gcasse@oralux.org>
+	release 0.40:
+	- Compatibility Debian Squeeze (stable), 32 and 64 bits, gnome-speech,
+	- Compatibility Ubuntu 11.10, 32 and 64 bits, speech-dispatcher.
+
+2011-12-30 Gilles Casse  <gcasse@oralux.org>
+	release 0.39:
+	- Compatibility linuxacessivel 2.0
+
+2011-09-05 Gilles Casse  <gcasse@oralux.org>
+	release 0.38:
+	- Compatibility Fedora 15 (tested using orca 3.0.1)
+	- Fixes: automatic speech dispatcher package builder (test on Debian wheezy/sid). Force arch 32, install the tts prior to build speech dispatcher.
+	- new switches: 
+          -c (or --cleanup) remove the temporary build directory,
+	  -m (or --m32) force 32 bits architecture.
+
+2011-07-10 Gilles Casse  <gcasse@oralux.org>
+	release 0.37:
+	- Compatible with Vinux 3.2 (speech-dispatcher 0.8)
+	- Fix debian version identification; thank you to Sébastien Hinderer.
+
+2011-05-18 Gilles Casse  <gcasse@oralux.org>
+	release 0.36:
+	- Build your own speech dispatcher packages: if your Debian distro is not yet compatible with the ibmtts speech-dispatcher package included in this archive, then an automatic packages builder proposes to built the i386 and amd64 packages (tested on Debian wheezy/sid).
+
+	- Voxin-installer accepts now a non-interactive/silent installation using these switches: 
+	  -l (or --lang) for language installation,
+	  -s (or --sd) for speech dispatcher driver installation,
+	  -u (or --uninstall) for uninstalling the TTS.
+
+	- Remove the support of Debian Lenny and older.
+
+2011-04-27 Gilles Casse  <gcasse@oralux.org>
+	release 0.35:
+	- ArchLinux compatibility,
+	- Ubuntu Natty compatibility,
+	- Suppress support of Debian Etch and older, Ubuntu Karmic (9.10) and older.
+
+2011-04-15 Gilles Casse  <gcasse@oralux.org>
+	release 0.34:
+	- Vinux 3.01 compatibility with backport of speech dispatcher (upstream git 2011-01-17) for better stability.
+
+2011-02-06 Gilles Casse  <gcasse@oralux.org>
+	release 0.33:
+	- Backport of speech dispatcher (upstream git 2011-01-17) for better stability (tested on Vinux 64 bits).
+	- puncFilter::filterText Fix crash due to an uninitialized output string. 
+	  Observed if the input string is empty, e.g. if the original ssml string is "</speak>" .
+
+2010-12-19 Gilles Casse  <gcasse@oralux.org>
+	release 0.32:
+	- Vinux 3.1 Compatibility (tested on 32 bits and 64 bits).
+
+2010-10-31 Gilles Casse  <gcasse@oralux.org>
+	release 0.31:
+	- Vinux 3.0 Compatibility (tested on 32 bits).
+
+2010-10-25 Gilles Casse  <gcasse@oralux.org>
+	release 0.30:
+	- Ubuntu Maverick Compatibility, 32 and 64 bits, for speech-dispatcher.
+
+2010-08-31 Gilles Casse  <gcasse@oralux.org>
+	release 0.29:
+	- Compatibility Debian Squeeze (testing), 32 and 64 bits, speech-dispatcher.
+	- Speechd.conf is automatically updated : add ibmtts to the local
+	and global configuration files.
+	- The installer is translated in German: Thank you to Ali Savas
+	<ali-savas@gmx.de> .
+
+2010-03-21 Gilles Casse  <gcasse@oralux.org> 
+	release 0.28: Ubuntu Lucid beta-1 compatibility.
+	The libao support is not provided as Ubuntu is using the new
+	speech dispatcher pulse module. 
+
+2010-01-18 Gilles Casse  <gcasse@oralux.org> 
+	release 0.27: Fix a major issue introduced in 0.26, which
+	prevented the installation of some languages.
+
+2009-12-24  Gilles Casse  <gcasse@oralux.org>
+
+	release 0.26: include a new punctuation filter, enable ssml support,
+	list installed languages and add the libao support in
+	speech-dispatcher (from Marco Skambraks).	
+
+	* puncfilter.so: this new filter helps to spell the punctuation
+	characters.	
+
+	It can be configured using a new annotation (inline
+	command), the `P command (note, this is caps P).
+	3 options:
+	`P0 means: do not spell punctuation
+	`P1 spell punctuation
+	`P2,. spell some punctuation characters (in this example, comma
+	and dot).
+
+	This filter must be activated after the SSML filter.
+
+	* ibmtts.c (speech-dispatcher): patch for taking in account the
+	punctuation filter.
+	
+	* ibmtts.c (speech-dispatcher): patch for enablng SSML.
+	
+	* ibmtts.c (speech-dispatcher): patch for returning the installed
+	voices. Helps for example the user to select another language
+	using Orca.
+	
+
+2009-10-26  Gilles Casse  <gcasse@oralux.org>
+
+	* release 0.25: Compatibility with Ubuntu Karmic (32 and 64 bits).
+	Warning: in 64 bits, voxin-installer may download the ia32 packages
+	from Ubuntu (around 150MB).
+	
+2009-10-19  Gilles Casse  <gcasse@oralux.org>
+
+	* release 0.24: Compatibility Debian Lenny amd64.
+	
+2009-06-22  Gilles Casse  <gcasse@oralux.org>
+
+	* release 0.23: Compatibility Ubuntu 9.04 amd64 (Jaunty).
+	
+2009-04-27  Gilles Casse  <gcasse@oralux.org>
+
+	* release 0.22: Compatibility Ubuntu 9.04 i386 (Jaunty).
+	
+2009-04-04  Gilles Casse  <gcasse@oralux.org>
+
+	* release 0.21: Compatibility Debian 5.0. Add a symbolic link from
+	packages/Debian.lenny to packages/Debian.5.0 .  	
+	
+2009-02-21  Gilles Casse  <gcasse@oralux.org>
+
+	* release 0.20: Ubuntu Intrepid 64bits : compatibility with
+	gnome-speech and speech-dispatcher.	
+	
+2008-12-14  Gilles Casse  <gcasse@oralux.org>
+
+	* release 0.19: Compatible Debian Lenny (rc1).
+	* gnome-speech: the Debian
+	GNOME_Speech_SynthesisDriver_Viavoice.server.in file is replaced by an
+	alternate file (dpkg-divert) using aoss.
+	* speech-dispatcher: build a speech-dispatcher-ibmtts package for
+	Debian Lenny.
+	* emacspeak: patch for compiling langswitch.cpp . The atcleci.so lib
+	is now built by default.
+	
+2008-11-10  Gilles Casse  <gcasse@oralux.org>
+
+	* release 0.18: Compatible Ubuntu Intrepid (8.10) using Orca and
+	Gnome-speech.
+
+	* gnome-speech: add aoss in GNOME_Speech_SynthesisDriver_Viavoice.server
+
+2008-08-16  Gilles Casse  <gcasse@oralux.org>
+
+	* say: Usage: say [-w wavfile] <sentence>
+	The say command has been updated for possibly being used with the
+	generic output module of speech dispatcher. 
+	Can be useful on 64 bits system as an alternative to the ibmtts 32
+	bits libraries. Speech-dispatcher conf files added (in say/ directory).
+
+	* voxin-installer.sh, cryptoloop: the single runtime is no more
+	encrypted, for an easier install stage.	
+
+	* voxin-installer.sh, libstdc++2.10: the files are now available
+	unpacked for an easier install on non-Debian based distro (tested on Slax).
+
+
+2008-06-09  Gilles Casse  <gcasse@oralux.org>
+
+	* speech-dispatcher-ibmtts: the new package can now enable or
+	disable the abbreviation dictionaries.
+	For disabling the abbreviation dictionary, please add the
+	following line to your ibmtts.conf file:	
+	IbmttsUseAbbreviation 0
+	
+
+2008-05-12  Gilles Casse  <gcasse@oralux.org>
+
+	* voxin-installer.sh: fix, do not try to install
+	gnome-speech-ibmtts in a Ubuntu 8.04 system (see in a Gutsy to
+	Hardy updated system). Voxin provides gnome-speech-viavoice.
+	
+
+2008-04-28  Gilles Casse  <gcasse@oralux.org>
+
+	* release 0.16: Compatible Ubuntu Hardy (8.04) using Orca and
+	Gnome-speech.
+	The other solutions could become usable out of box, once they
+	better take in account PulseAudio. We hope to contribute to this
+	in Summer 2008.
+
+
+2007-10-22  Gilles Casse  <gcasse@gg-ltop>
+
+	* release 0.15: Compliant with Ubuntu Gutsy (7.10)
+
+	
+2007-05-17  Gilles Casse  <gcasse@gg-ltop>
+
+	* release 0.14: Initial release.
+
+
+
+	

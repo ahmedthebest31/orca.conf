@@ -1,0 +1,343 @@
+
+			 VOXIN 3.3rc4 README
+
+
+Table of Contents
+
+1 Check the voxin archive
+2 General Install
+.. 2.1 Voxin updates
+.. 2.2 Speech Dispatcher
+..... 2.2.1 spd-conf
+..... 2.2.2 Editing speechd.conf
+.. 2.3 Orca
+.. 2.4 Emacspeak
+.. 2.5 Fenrir
+.. 2.6 Speakup connector
+.. 2.7 How to uninstall Voxin?
+3 Compatible GNU/Linux Distributions
+.. 3.1 Voxin 3.3rc4
+4 voxin.ini configuration file
+5 Dictionaries
+6 voxin-say command
+
+
+For support or feedback, please send a mail to contact@oralux.org with
+possibly the log file (log/voxin.log).
+
+
+1 Check the voxin archive
+
+  Before any install, check that your voxin archive (the .tgz file) has
+  a correct checksum.
+
+  The checksum file can be downloaded from [GitHub under the Oralux
+  account] .
+
+  In the following example, our voxin archive
+  (voxin-update-3.3rc4.tgz) is checked against the checksum file
+  (voxin-3.3rc4.sha512).
+
+  These two files have been copied in the same directory.  In a console,
+  change/cd to this directory; then type:
+
+  sha512sum --ignore-missing --check voxin-3.3rc4.sha512
+
+  This command must return "OK"
+  voxin-update-3.3rc4.tgz: OK
+
+
+  [GitHub under the Oralux account]
+  https://raw.githubusercontent.com/Oralux/voxin-installer/master/check/3.3rc4/voxin-3.3rc4.sha512
+
+
+2 General Install
+
+  Just run voxin-installer.sh as root and answer to the questions.  For
+  example, with voxin-enu-3.3rc4 :
+
+  cd voxin-3.3rc4
+  cd voxin-enu-3.3rc4
+  sudo --login $PWD/voxin-installer.sh
+
+  Or without sudo:
+  su --login -c $PWD/voxin-installer.sh
+
+
+2.1 Voxin updates
+
+  Your download link is usually permanent and points on the last voxin
+  release.
+
+  To update Voxin, use one of your download links to get the last
+  version.  If you have Vocalizer Embedded and IBM TTS voices, just use
+  one of your Vocalizer Embedded link to update Voxin.
+
+  The releases are announced in the [Voxin RSS feed].
+
+  Voxin is released several times a year:
+  - to complete the list of compatible distros (usually after user
+    request),
+  - to add new features and fixes (libvoxin offers paths of
+    improvement).
+
+  Besides the voxin release, a lighter tarball, the voxin update is
+  available and does not include the text-to-speech package.
+
+
+  [Voxin RSS feed] http://voxin.oralux.net/rss.xml
+
+
+2.2 Speech Dispatcher
+
+  The Speech Dispatcher voxin output module is either already provided
+  by your distribution (starting with speech-dispatcher 0.10.2) or
+  otherwise will be installed from the voxin tarball.  For example, the
+  voxin module is provided in December 2020 by:
+  - Arch Linux, speech-dispatcher package
+  - Debian Bullseye, speech-dispatcher-voxin package
+
+  The voxin-installer will install its own voxin-speechd-conf and/or
+  voxin-speechd packages if the voxin module is not already installed in
+  your system.
+
+  After your authorization, the installer may check each speechd.conf
+  file on your system and add the voxin module if needed.  You will have
+  to select voxin via your screen reader (e.g. see the Orca or Fenrir
+  paragraphs below) because the installer does not modified the default
+  output module in speechd.conf.
+
+  speechd.conf can also be modified using spd-conf or simply edited.
+  These two possibilities are described below.
+
+
+2.2.1 spd-conf
+--------------
+
+  spd-conf can be launched as normal user (not root user).
+
+  Here is an example in Ubuntu 18.04.
+
+  spd-conf asks several questions, voxin will be entered as default
+  output module.  spd-conf will accept it even if voxin is not yet in
+  its list of known modules.
+
+  Note: ENTER is written below when the ENTER key has been pressed.
+
+  $ spd-conf
+
+  Speech Dispatcher configuration tool
+
+  Do you want to setup a completely new configuration? [yes] : > ENTER
+  Do you want to create/setup a 'user' or 'system' configuration [user]
+  : > ENTER User configuration already exists.  Do you want to rewrite
+  it with a new one? [no] : >yes User configuration created in
+  /home/user/.config/speech-dispatcher Configuring user settings for
+  Speech Dispatcher Default output module [espeak] : >voxin The value
+  you have chosen is not among the suggested values.  You have chosen
+  'voxin'.  The suggested values are ['espeak', 'flite', 'festival',
+  'cicero', 'ibmtts'] Do you want to correct your answer? [yes] : >no
+  Default language (two-letter iso language code like "en" or "cs") [en]
+  : > ENTER Default audio output method [pulse] : > ENTER Default speech
+  rate (on the scale of -100..100, 0 is default, 50 is faster, -50 is
+  slower) [1] : > ENTER Default speech pitch (on the scale of -100..100,
+  0 is default, 50 is higher, -50 is lower) [1] : > ENTER Do you want to
+  have Speech Dispatcher automatically started from ~/.config/autostart
+  ?  This is usually not necessary, most applications will start Speech
+  Dispatcher automatically. [no] : > ENTER Do you want to start/restart
+  Speech Dispatcher now and run some tests? [yes] : > ENTER Starting
+  Speech Dispatcher in user-mode [Sat Dec 26 10:20:47 2020 : 338076]
+  speechd: Speech Dispatcher 0.8.8 starting Testing Speech Dispatcher
+  using spd_say Did you hear the message about Speech Dispatcher
+  working? [yes] : > ENTER Speech Dispatcher is installed and working!
+  Speech Dispatcher works. Do you want to skip other tests? [yes] : >
+  ENTER
+
+
+  Diagnostics results: Speech Dispatcher is working End of diagnostics
+  results
+
+
+2.2.2 Editing speechd.conf
+--------------------------
+
+  The Speech Dispatcher configuration file can be edited manually:
+  - either comment each 'AddModule' line, then speech-dispatcher should
+    load each present module,
+  - or add this line to select explicitly the voxin module:
+  AddModule "voxin" "sd_voxin" "voxin.conf"
+
+  Optionally, to set voxin as default module, modify the unique
+  DefaultModule line: DefaultModule voxin
+
+
+  Finally restart speech-dispatcher (e.g. logout or reboot).
+
+  - global conf: /etc/speech-dispatcher/speechd.conf
+  - local conf (created by spd-conf):
+    $HOME/.config/speech-dispatcher/speechd.conf
+
+
+2.3 Orca
+
+  For Orca/Speech Dispatcher users: the newly installed TTS will be
+  taken in account at the next start of Orca/Speech-dispatcher (if you
+  authorized voxin-installer to update your configuration).  So, you may
+  want to reboot your system.  Then, if needed, configure Orca as
+  indicated below.
+
+  In the Orca Screen Reader Preferences window, Voice tab:
+  - set "Speech system" to "Speech Dispatcher"
+  - set "Speech synthesizer" to voxin
+
+  then press the Apply button.
+
+  The Orca preferences window is displayed using this command line:
+
+  orca -s
+
+  or typing the Orca modifier key + SPACE key
+
+
+2.4 Emacspeak
+
+  The [emacspeak installer] helps to install Emacspeak with eSpeak and
+  Voxin.
+
+  If the sound is choppy under Alsa, please copy the asoundrc file from
+  emacspeak to your home directory as ~/.asoundrc For example: cp
+  emacspeak-45.0/share/emacs/site-lisp/emacspeak/servers/linux-outloud/asoundrc
+  $HOME/.asoundrc
+
+
+  [emacspeak installer]
+  https://github.com/Oralux/emacspeak_voxin_install/releases
+
+
+2.5 Fenrir
+
+  Select the speech-dispatcher driver and the voxin module in
+  settings.conf.  For example in
+  /etc/fenrirscreenreader/settings/settings.conf
+
+  driver=speechdDriver module=voxin
+
+
+2.6 Speakup connector
+
+  You may want to install speechd-up (interface between Speakup and
+  Speech Dispatcher).
+
+  We proposed voxinup, the Speakup connector for Voxin; but
+  incompatibilities with the graphical desktop appeared for example in
+  Vinux 5.1.  The [voxinup_install] helped to install "voxinup" in Arch
+  Linux or Debian based distros.  The original Speakup connector,
+  "spk-connect-ttsynth", was renamed to "voxinup" to ease at least the
+  typing.
+
+
+  [voxinup_install] https://github.com/Oralux/voxinup_install/releases
+
+
+2.7 How to uninstall Voxin?
+
+  Voxin 3.3rc4 can be uninstalled with this command line:
+  sudo --login $PWD/voxin-installer.sh -u
+
+  Or without sudo:
+  su --login -c "$PWD/voxin-installer.sh -u"
+
+  Please note that the text-to-speech files will be removed too (under
+  /opt/IBM/ibmtts or /opt/oralux/nve).
+
+
+3 Compatible GNU/Linux Distributions
+
+3.1 Voxin 3.3rc4
+
+  The last checked distributions are listed below.  Much more should be
+  compatible.
+
+  For support or feedback, please send a mail to contact@oralux.org with
+  possibly the log file (log/voxin.log).
+
+  ------------------------------------------------------
+   Distributions                        Architectures   
+  ------------------------------------------------------
+   Arch Linux (January 2021)            x86_64          
+   Arch Linux ARM (August 2020)         armv7l, aarch64 
+   Debian 10, 11 (sid)                  x86_64          
+   Fedora 33                            x86_64          
+   Gentoo (december 2020)               x86_64          
+   openSUSE Tumbleweed (December 2020)  x86_64          
+   Raspberry Pi OS                      armv7l          
+   Slint64-14.2.1.2 (January 2021)      x86_64          
+   Ubuntu 18.04, 20.04                  x86_64          
+   Ubuntu ARM Mate 20.04                aarch64         
+  ------------------------------------------------------
+
+
+4 voxin.ini configuration file
+
+  The user may now define the default value of several parameters.
+  - capitalization
+  - punctuation
+
+  and only for IBM TTS:
+  - dictionaryDir
+  - useAbbreviation
+
+  These values will be overwritten by the calling software
+  (e.g. speech-dispatcher, emacspeak,...).  The voxin.ini file is
+  consequently interesting when a parameter is not yet managed by the
+  calling software.
+
+  voxin.ini is expected to be present locally at:
+  $HOME/.config/voxin/voxin.ini or if not found, available globally at:
+  /var/opt/oralux/voxin/voxin.ini
+
+  The installer creates a writable default file in
+  /var/opt/oralux/voxin/voxin.ini if none exists.
+
+  Brief Example:
+
+  [general] capitalization=icon #punctuation=none
+
+  [viavoice] dictionaryDir=/var/opt/IBM/ibmtts/dict useAbbreviation=no
+
+
+5 Dictionaries
+
+  User dictionaries are currently only available for IBM TTS.  They are
+  enabled by default by speech-dispatcher: in voxin.conf (or
+  ibmtts.conf), the IbmttsDictionaryFolder variable is set to
+  /var/opt/IBM/ibmtts/dict.
+
+  Examples of dictionaries are included in this archive under:
+  dictionary/var/opt/IBM/ibmtts/dict
+
+
+6 voxin-say command
+
+  voxin-say is a command which converts text to speech.
+
+  EXAMPLES :
+
+  # Say 'hello world' and redirect output to an external audio player:
+  voxin-say "hello world" | aplay
+
+  # Read file.txt and save speech to an audio file:
+  voxin-say -f file.txt -w file.wav
+  voxin-say -f file.txt > file.wav
+
+  # The following command is incorrect because no output is supplied:
+  voxin-say "Hello all"
+
+  # Correct command to read a file in French at 500 words per minute, use 4 jobs to speed up conversion
+  voxin-say -f file.txt -l fr -s 500 -j 4 -w audio.wav
+
+
+
+Footnotes
+
+[1] DEFINITION NOT FOUND.
